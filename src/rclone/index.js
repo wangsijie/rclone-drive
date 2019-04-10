@@ -1,18 +1,23 @@
-const spawn = require('spawn-promise');
-const { isDir } = require('../util');
+const spawnP = require('spawn-promise');
+const { spawn } = require('child_process');
+const { baseRemote } = require('../config');
 
 module.exports.ls = async (path) => {
-    const output = await spawn('rclone', [
-        'lsf',
-        `sijie:document${path}`
+    const output = await spawnP('rclone', [
+        'lsjson',
+        `${baseRemote}${path}`
     ]);
     if (!output) {
         return [];
     }
-    const files = output.toString().split('\n');
-    return files.filter(item => item).sort((a, b) => {
-        const scoreA = isDir(a) ? 1 : 0;
-        const scoreB = isDir(b) ? 1 : 0;
-        return scoreB - scoreA;
-    });
+    const files = JSON.parse(output.toString());
+    return files;
+};
+
+module.exports.cat = async (path, res) => {
+    const rclone = spawn('rclone', [
+        'cat',
+        `${baseRemote}${path}`
+    ]);
+    rclone.stdout.pipe(res);
 };
