@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <% navs.forEach(function(nav){ %>
+                <% if (nav.active) { %>
+                    <li class="breadcrumb-item active"><%= nav.name %></li>
+                <% } else { %>
+                    <li class="breadcrumb-item"><a href="<%= nav.url %>"><%= nav.name %></a></li>
+                <% } %>
+            <% }); %>
+        </ol>
+    </nav>
+    <table class="table">
+        <thead>
+            <tr> 
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Type</th>
+            <th scope="col">Modify Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% files.forEach(function(file){ %>
+                <tr>
+                    <td>
+                        <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
+                        <a href="<%= file.url %>"><%= file.name %></a>
+                    </td>
+                    <td><%= file.size %></td>
+                    <td><%= file.type %></td>
+                    <td><%= file.time %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+</body>
+<% include partials/foot %>
+</html>
