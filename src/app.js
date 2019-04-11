@@ -1,10 +1,16 @@
 const express = require('express');
+const busboy = require('connect-busboy');
 const querystring = require('querystring');
 const moment = require('moment');
+const fs = require('fs');
+const path = require('path');
 const fileSize = require('filesize');
 const rclone = require('./rclone');
 
 const app = express();
+app.use(busboy({
+    highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
+}));
 app.use('/asset', express.static('asset'))
 app.set('view engine', 'ejs');
 app.set('views', './src/views')
@@ -18,6 +24,7 @@ app.use(async (req, res, next) => {
     if (!/^\/browser/.test(path)) {
         return next();
     }
+    const { upload } = req.query;
     const directory = path.substr(8);
     const normalizedDirectory = directory[directory.length - 1] === '/' ? directory.substr(0, directory.length - 1) : directory;
     const result = await rclone.ls(directory);
@@ -41,7 +48,13 @@ app.use(async (req, res, next) => {
         url += `${nav}/`;
         return { name: nav, url, active };
     });
-    res.render('browser', { page: `${directory} - RClone Drive`, files, navs });
+    res.render('browser', {
+        page: `${directory} - RClone Drive`,
+        files,
+        navs,
+        directory: normalizedDirectory,
+        uploaded: upload === 'success'
+    });
 });
 
 app.use(async (req, res, next) => {
@@ -51,6 +64,27 @@ app.use(async (req, res, next) => {
     }
     const directory = path.substr(9);
     rclone.cat(directory, res);
+});
+
+app.post('/upload', (req, res) => {
+
+    req.pipe(req.busboy); // Pipe it trough busboy
+
+    req.busboy.on('file', (fieldname, file, filename) => {
+        console.log(`Upload of '${filename}' started`);
+
+        // Create a write stream of the new file
+        const fstream = fs.createWriteStream(path.join(__dirname, filename));
+        // Pipe it trough
+        file.pipe(fstream);
+
+        // On finish of the upload
+        fstream.on('close', () => {
+            console.log(`Upload of '${filename}' finished`);
+            const { path } = req.query;
+            res.redirect(`/browser${path}?upload=success`);
+        });
+    });
 });
 
 module.exports = app;

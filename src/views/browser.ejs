@@ -6,6 +6,11 @@
 <body>
 
 <div class="container mt-5">
+    <% if (uploaded) { %>
+        <div class="alert alert-success" role="alert">
+            File Uploaded!
+        </div>
+    <% } %>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <% navs.forEach(function(nav){ %>
@@ -17,6 +22,13 @@
             <% }); %>
         </ol>
     </nav>
+    <div class="operations mb-3">
+        <button type="button" class="btn btn-primary" id="upload-button">Upload</button>
+        <form action="/upload?path=<%= directory %>" id="upload-form" method="post" enctype="multipart/form-data" style="display:none">
+            <input type="file" id="upload-field" name="fileToUpload">
+            <input type="submit">
+        </form>
+    </div>
     <table class="table">
         <thead>
             <tr> 
