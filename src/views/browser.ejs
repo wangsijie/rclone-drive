@@ -29,7 +29,7 @@
             <input type="submit">
         </form>
     </div>
-    <table class="table">
+    <table class="table d-none d-md-block">
         <thead>
             <tr> 
             <th scope="col">Name</th>
@@ -42,8 +42,10 @@
             <% files.forEach(function(file){ %>
                 <tr>
                     <td>
-                        <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                        <a href="<%= file.url %>"><%= file.name %></a>
+                        <div class="text-nowrap text-truncate">
+                            <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
+                            <a href="<%= file.url %>"><%= file.name %></a>
+                        </div>
                     </td>
                     <td><%= file.size %></td>
                     <td><%= file.type %></td>
@@ -52,6 +54,14 @@
             <% }); %>
         </tbody>
     </table>
+    <div class="d-md-none">
+        <% files.forEach(function(file){ %>
+            <div class="text-nowrap text-truncate border-bottom pb-1 mb-1">
+                <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
+                <a href="<%= file.url %>"><%= file.name %></a>
+            </div>
+        <% }); %>
+    </div>
 </div>
 </body>
 <% include partials/foot %>
