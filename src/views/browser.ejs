@@ -44,7 +44,7 @@
                     <td>
                         <div class="text-nowrap text-truncate">
                             <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                            <a href="<%= file.url %>"><%= file.name %></a>
+                            <a href="<%= file.url %>" target="_blank"><%= file.name %></a>
                         </div>
                     </td>
                     <td><%= file.size %></td>
@@ -58,7 +58,7 @@
         <% files.forEach(function(file){ %>
             <div class="text-nowrap text-truncate border-bottom pb-1 mb-1">
                 <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                <a href="<%= file.url %>"><%= file.name %></a>
+                <a href="<%= file.url %>" target="_blank"><%= file.name %></a>
             </div>
         <% }); %>
     </div>
