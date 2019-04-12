@@ -13,6 +13,7 @@ module.exports.ls = async (directory) => {
             type: file.IsDir ? '-' : mime.extension(file.MimeType),
             size: file.Size ? fileSize(file.Size) : '-',
             icon: file.IsDir ? 'folder' : 'file',
+            isDir: file.IsDir,
             url: `/${file.IsDir ? 'browser' : 'download'}${normalizedDirectory}/${file.Name}`
         };
     });
