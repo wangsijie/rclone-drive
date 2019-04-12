@@ -29,34 +29,36 @@
             <input type="submit">
         </form>
     </div>
-    <table class="table d-none d-md-block">
-        <thead>
-            <tr> 
-            <th scope="col">Name</th>
-            <th scope="col">Size</th>
-            <th scope="col">Type</th>
-            <th scope="col">Modify Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% files.forEach(function(file){ %>
-                <tr>
-                    <td>
-                        <div class="text-nowrap text-truncate">
-                            <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                            <a
-                                href="<%= file.url %>"
-                                <%= file.isDir ? '' : 'target="_blank"' %>
-                            ><%= file.name %></a>
-                        </div>
-                    </td>
-                    <td><%= file.size %></td>
-                    <td><%= file.type %></td>
-                    <td><%= file.time %></td>
+    <div class="d-none d-md-block">
+        <table class="table">
+            <thead>
+                <tr> 
+                <th scope="col">Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Type</th>
+                <th scope="col">Modify Time</th>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% files.forEach(function(file){ %>
+                    <tr>
+                        <td>
+                            <div class="text-nowrap text-truncate">
+                                <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
+                                <a
+                                    href="<%= file.url %>"
+                                    <%= file.isDir ? '' : 'target="_blank"' %>
+                                ><%= file.name %></a>
+                            </div>
+                        </td>
+                        <td><%= file.size %></td>
+                        <td><%= file.type %></td>
+                        <td><%= file.time %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
     <div class="d-md-none">
         <% files.forEach(function(file){ %>
             <div class="text-nowrap text-truncate border-bottom pb-1 mb-1">
