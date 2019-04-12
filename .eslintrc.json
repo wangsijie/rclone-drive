@@ -13,6 +13,9 @@
         "ecmaVersion": 2018
     },
     "rules": {
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "arrow-parens": "off",
+        "operator-linebreak": "off",
+        "implicit-arrow-linebreak": "off"
     }
 }

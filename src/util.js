@@ -1,4 +1,4 @@
-module.exports.isDir = path => {
+module.exports.isDir = (path) => {
     if (!path) {
         return false;
     }

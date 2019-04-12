@@ -6,27 +6,29 @@ const rclone = require('./rclone');
 const browserService = require('./services/browser');
 
 const app = express();
-app.use(busboy({
-    highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
-}));
-app.use('/asset', express.static('asset'))
+app.use(
+    busboy({
+        highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
+    }),
+);
+app.use('/asset', express.static('asset'));
 app.set('view engine', 'ejs');
-app.set('views', './src/views')
+app.set('views', './src/views');
 
 app.get('/', (req, res) => {
     res.redirect('/browser/');
 });
 
 app.get('/browser*', async (req, res) => {
-    const path = Object.keys(querystring.decode(req.path))[0];
-    const directory = path.substr(8);
+    const queryPath = Object.keys(querystring.decode(req.path))[0];
+    const directory = queryPath.substr(8);
     const result = await browserService.ls(directory);
     res.render('browser', result);
 });
 
-app.get('/download*', async (req, res, next) => {
-    const path = Object.keys(querystring.decode(req.path))[0];
-    const directory = path.substr(9);
+app.get('/download*', async (req, res) => {
+    const queryPath = Object.keys(querystring.decode(req.path))[0];
+    const directory = queryPath.substr(9);
     rclone.cat(directory, res);
 });
 
