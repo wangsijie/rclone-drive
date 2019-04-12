@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "scripts": {
     "dev": "nodemon start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +25,12 @@
     "spawn-promise": "^0.1.8"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "nodemon": "^1.18.11",
+    "prettier": "^1.16.4"
   }
 }
