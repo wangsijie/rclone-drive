@@ -1,5 +1,6 @@
 const moment = require('moment');
 const fileSize = require('filesize');
+const mime = require('mime-types');
 const rclone = require('../rclone');
 
 module.exports.ls = async (directory) => {
@@ -8,8 +9,8 @@ module.exports.ls = async (directory) => {
     const files = result.sort((a, b) => b.IsDir - a.IsDir).map(file => {
         return {
             name: file.Name,
-            time: moment(file.ModTime).format('YYYY-MM-DD HH:mm:ss'),
-            type: file.MimeType,
+            time: file.IsDir ? '-' : moment(file.ModTime).format('YYYY-MM-DD HH:mm:ss'),
+            type: file.IsDir ? '-' : mime.extension(file.MimeType),
             size: file.Size ? fileSize(file.Size) : '-',
             icon: file.IsDir ? 'folder' : 'file',
             url: `/${file.IsDir ? 'browser' : 'download'}${normalizedDirectory}/${file.Name}`
