@@ -21,3 +21,13 @@ module.exports.cat = async (path, res) => {
     ]);
     rclone.stdout.pipe(res);
 };
+
+module.exports.rcat = (path, stream) => new Promise((resolve, reject) => {
+    const rclone = spawn('rclone', [
+        'rcat',
+        `${baseRemote}${path}`
+    ]);
+    rclone.on('error', (e) => reject(e));
+    stream.pipe(rclone.stdin);
+    rclone.stdin.on('close', () => resolve());
+});
