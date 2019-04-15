@@ -43,13 +43,7 @@
                 <% files.forEach(function(file){ %>
                     <tr>
                         <td>
-                            <div class="text-nowrap text-truncate">
-                                <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                                <a
-                                    href="<%= file.url %>"
-                                    <%= file.isDir ? '' : 'target="_blank"' %>
-                                ><%= file.name %></a>
-                            </div>
+                            <% include partials/file %> 
                         </td>
                         <td><%= file.size %></td>
                         <td><%= file.type %></td>
@@ -61,13 +55,7 @@
     </div>
     <div class="d-md-none">
         <% files.forEach(function(file){ %>
-            <div class="text-nowrap text-truncate border-bottom pb-1 mb-1">
-                <img src="/asset/icons/<%= file.icon %>.svg" width="24" height="24" />
-                <a
-                    href="<%= file.url %>"
-                    <%= file.isDir ? '' : 'target="_blank"' %>
-                ><%= file.name %></a>
-            </div>
+            <% include partials/file %> 
         <% }); %>
     </div>
 </div>
