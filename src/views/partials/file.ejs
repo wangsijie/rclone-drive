@@ -6,11 +6,14 @@
             <%= file.isDir ? '' : 'target="_blank"' %>
         ><%= file.name %></a>
     </div>
-    <div class="option dropdown pl-2">
+    <div class="operation dropdown pl-2">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        <form action="/delete?path=<%= file.path %>" class="delete-form d-none" method="post">
+            <input type="submit">
+        </form>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="#">Rename</a>
-            <a class="dropdown-item" href="#">Delete</a>
+            <a class="dropdown-item delete" href="#" data-file-name="<%= file.name %>">Delete</a>
         </div>
     </div>
 </div>

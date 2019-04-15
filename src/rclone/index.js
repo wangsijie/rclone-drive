@@ -23,3 +23,5 @@ module.exports.rcat = (path, stream) =>
         stream.pipe(rclone.stdin);
         rclone.stdin.on('close', () => resolve());
     });
+
+module.exports.deletefile = async (path) => spawnP('rclone', ['deletefile', `${baseRemote}${path}`]);

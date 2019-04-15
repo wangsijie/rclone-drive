@@ -23,6 +23,7 @@ module.exports.ls = async (directory) => {
             url: `/${
                 file.IsDir ? 'browser' : 'download'
             }${normalizedDirectory}/${file.Name}`,
+            path: `${normalizedDirectory}/${file.Name}`,
         }));
     let url = '/browser/';
     const navItems = normalizedDirectory.split('/');

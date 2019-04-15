@@ -4,8 +4,8 @@ Under development
 
 ## TODO
 
+- [ ] Deleting(dir)
 - [ ] Password & Login
-- [ ] Deleting
 - [ ] Upload spinner
 - [ ] Upload progress
 - [ ] Directory/File move

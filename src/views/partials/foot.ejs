@@ -1,8 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete <span id="delete-confirm-name"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/asset/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="/asset/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="/asset/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
+    var deleteFileButtonRef = null;
     $(document).ready(function() {
+        // file upload
         $('#upload-button').click(function() {
             $('#upload-field').click();
         });
@@ -10,6 +32,17 @@
             if ($(this).val()) {
                 $('#upload-form').submit();
             }
+        });
+        // file delete
+        $('.file-name .operation .delete').click(function() {
+            var fileName = $(this).data('file-name');
+            $('#delete-confirm-name').text(fileName);
+            deleteFileButtonRef = this;
+            $('#deleteModal').modal();
+            return false;
+        });
+        $('.confirm-delete').click(function() {
+            $(deleteFileButtonRef).parent().parent().children('.delete-form').submit();
         });
     });
 </script>
