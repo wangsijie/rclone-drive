@@ -45,8 +45,12 @@ app.post('/browser*', (req, res) => {
 });
 
 app.post('/delete', async (req, res) => {
-    const filePath = req.query.path;
-    await rclone.deletefile(filePath);
+    const { path: filePath, isDir } = req.query;
+    if (isDir) {
+        await rclone.purge(filePath);
+    } else {
+        await rclone.deletefile(filePath);
+    }
     res.redirect(`/browser${path.dirname(filePath)}`);
 });
 

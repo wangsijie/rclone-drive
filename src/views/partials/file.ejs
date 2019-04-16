@@ -8,7 +8,7 @@
     </div>
     <div class="operation dropdown pl-2">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-        <form action="/delete?path=<%= file.path %>" class="delete-form d-none" method="post">
+        <form action="/delete?path=<%= file.path %>&isDir=<%= file.isDir ? 1 : 0 %>" class="delete-form d-none" method="post">
             <input type="submit">
         </form>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

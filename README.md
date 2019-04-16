@@ -4,7 +4,7 @@ Under development
 
 ## TODO
 
-- [ ] Deleting(dir)
+- [ ] Mkdir
 - [ ] Password & Login
 - [ ] Upload spinner
 - [ ] Upload progress
