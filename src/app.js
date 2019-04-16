@@ -2,6 +2,7 @@ const express = require('express');
 const busboy = require('connect-busboy');
 const querystring = require('querystring');
 const path = require('path');
+const bodyParser = require('body-parser');
 const rclone = require('./rclone');
 const browserService = require('./services/browser');
 
@@ -11,6 +12,7 @@ app.use(
         highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer
     }),
 );
+app.use(bodyParser.urlencoded());
 app.use('/asset', express.static('asset'));
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
@@ -52,6 +54,15 @@ app.post('/delete', async (req, res) => {
         await rclone.deletefile(filePath);
     }
     res.redirect(`/browser${path.dirname(filePath)}`);
+});
+
+app.post('/mkdir', async (req, res) => {
+    const { path: dir } = req.query;
+    const { folder } = req.body;
+    // RClone can't create empty dir, (https://github.com/ncw/rclone/issues/1837)
+    // so just navigate to target dir, after upload any file, the dir will automaticly created.
+    // await rclone.mkdir(path.join(dir, folder));
+    res.redirect(`/browser${path.join(dir, folder)}`);
 });
 
 module.exports = app;

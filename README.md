@@ -4,7 +4,6 @@ Under development
 
 ## TODO
 
-- [ ] Mkdir
 - [ ] Password & Login
 - [ ] Upload spinner
 - [ ] Upload progress
