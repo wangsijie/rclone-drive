@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "rclone-drive": "cli.js"
+  },
   "lint-staged": {
     "src/**/*.js": [
       "prettier --single-quote --write",
@@ -17,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "commander": "^2.20.0",
     "connect-busboy": "0.0.2",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
