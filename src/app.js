@@ -62,7 +62,7 @@ app.post('/mkdir', async (req, res) => {
     // RClone can't create empty dir, (https://github.com/ncw/rclone/issues/1837)
     // so just navigate to target dir, after upload any file, the dir will automaticly created.
     // await rclone.mkdir(path.join(dir, folder));
-    res.redirect(`/browser${path.join(dir, folder)}`);
+    res.redirect(path.join('/browser', dir, folder));
 });
 
 module.exports = app;
