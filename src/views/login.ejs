@@ -5,8 +5,18 @@
 </head>
 <body>
 
-<div class="container mt-5">
-    login page
+<div class="container login-container">
+    <% if (typeof wrongPassword === 'boolean' && wrongPassword) { %>
+        <div class="alert alert-danger" role="alert">
+            Invalid password
+        </div>
+    <% } %>
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
 </div>
 <% include partials/foot %>
 </body>

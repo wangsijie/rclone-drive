@@ -4,6 +4,7 @@ const querystring = require('querystring');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const config = require('./config');
 const rclone = require('./rclone');
 const browserService = require('./services/browser');
 const authService = require('./services/auth');
@@ -16,11 +17,11 @@ app.use(
     }),
 );
 app.use(session({
-    secret: 'keyboard cat',
+    key: 'user',
+    secret: config.secret,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-        secure: true,
         maxAge: 3600 * 1000,
     },
 }));
@@ -37,6 +38,16 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login', { page: 'Login - RClone Drive' });
+});
+
+app.post('/login', async (req, res) => {
+    const { password } = req.body;
+    if (password !== config.password) {
+        res.render('login', { page: 'Login - RClone Drive', wrongPassword: true });
+    } else {
+        await authService.login(req);
+        res.redirect('/browser');
+    }
 });
 
 app.get('/browser*', async (req, res) => {
