@@ -4,8 +4,6 @@ Under development
 
 ## TODO
 
-- [ ] Password & Login
-- [ ] Upload spinner
 - [ ] Upload progress
 - [ ] Directory/File move
 - [ ] Docker support
