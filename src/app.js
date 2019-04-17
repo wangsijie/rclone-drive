@@ -17,13 +17,10 @@ app.use(
     }),
 );
 app.use(session({
-    key: 'user',
-    secret: config.secret,
+    key: config.sessionKey,
+    secret: config.sessionSecret,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        maxAge: 3600 * 1000,
-    },
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/asset', express.static('asset'));
@@ -38,6 +35,11 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login', { page: 'Login - RClone Drive' });
+});
+
+app.get('/logout', (req, res) => {
+    res.clearCookie(config.sessionKey);
+    res.redirect('/login');
 });
 
 app.post('/login', async (req, res) => {
