@@ -1,9 +1,11 @@
 const spawnP = require('spawn-promise');
 const { spawn } = require('child_process');
-const { baseRemote } = require('../config');
+const { baseRemote, rcloneConfigPath, rclonePath } = require('../config');
+
+const generateRcloneCommand = (args) => ([rclonePath, [...args, '--config', rcloneConfigPath]]);
 
 module.exports.ls = async (path) => {
-    const output = await spawnP('rclone', ['lsjson', `${baseRemote}${path}`]);
+    const output = await spawnP(...generateRcloneCommand(['lsjson', `${baseRemote}${path}`]));
     if (!output) {
         return [];
     }
@@ -12,20 +14,20 @@ module.exports.ls = async (path) => {
 };
 
 module.exports.cat = async (path, res) => {
-    const rclone = spawn('rclone', ['cat', `${baseRemote}${path}`]);
+    const rclone = spawn(...generateRcloneCommand(['cat', `${baseRemote}${path}`]));
     rclone.stdout.pipe(res);
 };
 
 module.exports.rcat = (path, stream) =>
     new Promise((resolve, reject) => {
-        const rclone = spawn('rclone', ['rcat', `${baseRemote}${path}`]);
+        const rclone = spawn(...generateRcloneCommand(['rcat', `${baseRemote}${path}`]));
         rclone.on('error', (e) => reject(e));
         stream.pipe(rclone.stdin);
         rclone.stdin.on('close', () => resolve());
     });
 
-module.exports.deletefile = async (path) => spawnP('rclone', ['deletefile', `${baseRemote}${path}`]);
+module.exports.deletefile = async (path) => spawnP(...generateRcloneCommand(['deletefile', `${baseRemote}${path}`]));
 
-module.exports.purge = async (path) => spawnP('rclone', ['purge', `${baseRemote}${path}`]);
+module.exports.purge = async (path) => spawnP(...generateRcloneCommand(['purge', `${baseRemote}${path}`]));
 
-module.exports.mkdir = async (path) => spawnP('rclone', ['mkdir', `${baseRemote}${path}`]);
+module.exports.mkdir = async (path) => spawnP(...generateRcloneCommand(['mkdir', `${baseRemote}${path}`]));

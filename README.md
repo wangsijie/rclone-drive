@@ -4,7 +4,7 @@ Under development
 
 ## TODO
 
+- [ ] Setup guide
+- [ ] Docker support
 - [ ] Upload progress
 - [ ] Directory/File move
-- [ ] Docker support
-- [ ] Setup guide

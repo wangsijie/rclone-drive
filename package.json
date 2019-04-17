@@ -18,12 +18,14 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "connect-busboy": "0.0.2",
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "filesize": "^4.1.2",
     "mime-types": "^2.1.22",
     "moment": "^2.24.0",
+    "nanoid": "^2.0.1",
     "spawn-promise": "^0.1.8"
   },
   "devDependencies": {
