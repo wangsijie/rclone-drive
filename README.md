@@ -2,11 +2,61 @@
 
 Under development
 
-## Installation
+## Features
+
+TODO
+
+## Getting started
+
+### 1. Install
 
 ```
 npm i -g rclone-drive
 ```
+
+### 2. Install rclone
+
+See [rclone official guide](https://rclone.org/downloads/), you can either download binary file or install globally.
+
+### 3. Config rclone
+
+See [rclone official guide](https://rclone.org/commands/rclone_config/), add a new remote using:
+
+```
+rclone config
+```
+
+### 4. Get params
+
+#### --rclone
+
+If you installed rclone globally, run this command to get rclone bin path:
+
+```
+which rclone
+```
+
+or if you downloaded rclone bin manually, that's the file `rclone`(`rclone.exe` in Windows)'s full path.
+
+#### --rclone-config
+
+Rclone config file path, by default, run this command to show:
+
+```
+rclone config file
+```
+
+#### --base-dir
+
+The remote you just added to rclone, for example, you add a s3 remote named `mys3`, and want to use bucket `mybucket` as rclone-drive's base dir, just set `mys3:mybucket` (no slash in the end)
+
+### 5. 🚀Ready to go
+
+```
+rclone-drive --rclone="<somepath>" --rclone-config="<somepath>" --base-dir="mys3:mybucket"
+```
+
+then open [http://localhost:3000](localhost:3000) and enter the password shown in command line.
 
 ## Configuration
 
@@ -27,7 +77,6 @@ Options:
 
 ## TODO
 
-- [ ] Setup guide
 - [ ] Docker support
 - [ ] Error handler
 - [ ] Upload progress
