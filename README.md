@@ -4,6 +4,8 @@
 
 🏗️Under development
 
+![screenshot](./guide/screenshot.png)
+
 ## 👻 Features
 
 Thanks to rclone
