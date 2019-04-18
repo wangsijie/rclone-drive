@@ -1,12 +1,12 @@
-# Rclone Drive &middot; [![npm version](https://badge.fury.io/js/rclone-drive.svg)](https://badge.fury.io/js/rclone-drive)
+# Rclone Drive &middot; [![npm version](https://badge.fury.io/js/rclone-drive.svg)](https://badge.fury.io/js/rclone-drive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Under development
 
-## Features
+## 👻 Features
 
 TODO
 
-## Getting started
+## 🛫 Getting started
 
 ### 1. Install
 
@@ -50,7 +50,7 @@ rclone config file
 
 The remote you just added to rclone, for example, you add a s3 remote named `mys3`, and want to use bucket `mybucket` as rclone-drive's base dir, just set `mys3:mybucket` (no slash in the end)
 
-### 5. 🚀Ready to go
+### 5. 🚀 Ready to go
 
 ```
 rclone-drive --rclone="<somepath>" --rclone-config="<somepath>" --base-dir="mys3:mybucket"
@@ -58,7 +58,7 @@ rclone-drive --rclone="<somepath>" --rclone-config="<somepath>" --base-dir="mys3
 
 then open [http://localhost:3000](http://localhost:3000) and enter the password shown in command line.
 
-## Configuration
+## ⚙️ Configuration
 
 ```
 Usage: rclone-drive [options]
@@ -75,7 +75,7 @@ Options:
   -h, --help                          output usage information
 ```
 
-## TODO
+## 🔧 TODO
 
 - [ ] Docker support
 - [ ] Error handler
