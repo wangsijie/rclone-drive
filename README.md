@@ -56,7 +56,7 @@ The remote you just added to rclone, for example, you add a s3 remote named `mys
 rclone-drive --rclone="<somepath>" --rclone-config="<somepath>" --base-dir="mys3:mybucket"
 ```
 
-then open [http://localhost:3000](localhost:3000) and enter the password shown in command line.
+then open [http://localhost:3000](http://localhost:3000) and enter the password shown in command line.
 
 ## Configuration
 
