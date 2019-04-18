@@ -1,10 +1,16 @@
 const nanoid = require('nanoid');
+const path = require('path');
+const homedir = require('os').homedir();
 
-module.exports = {
-    baseRemote: process.env.BASE_REMOTE,
-    password: process.env.PASSWORD || nanoid(),
-    sessionSecret: process.env.SESSION_SECRET || nanoid(),
-    sessionKey: 'user',
-    rclonePath: process.env.RCLONE_PATH,
-    rcloneConfigPath: process.env.RCLONE_CONFIG_PATH,
+const data = {};
+
+data.init = (config) => {
+    data.baseRemote = config.baseRemote;
+    data.password = config.password || nanoid();
+    data.sessionSecret = config.sessionSecret || nanoid();
+    data.sessionKey = 'user';
+    data.rclonePath = config.rclonePath || '/usr/local/bin/rclone';
+    data.rcloneConfigPath = config.rcloneConfigPath || path.join(homedir, '.config/rclone/rclone.conf');
 };
+
+module.exports = data;

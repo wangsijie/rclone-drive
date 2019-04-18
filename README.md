@@ -6,5 +6,6 @@ Under development
 
 - [ ] Setup guide
 - [ ] Docker support
+- [ ] Error handler
 - [ ] Upload progress
 - [ ] Directory/File move
