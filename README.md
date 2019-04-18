@@ -1,10 +1,26 @@
 # Rclone Drive &middot; [![npm version](https://badge.fury.io/js/rclone-drive.svg)](https://badge.fury.io/js/rclone-drive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Under development
+☁️Simple web cloud storage based on rclone, transform cloud storage (s3, google drive, one drive, dropbox) into own custom web-based storage
+
+🏗️Under development
 
 ## 👻 Features
 
-TODO
+Thanks to rclone
+
+1. ✅Support most of well-known cloud storage providers. (s3, google drive, dropbox, one drive ...[see full list](https://rclone.org/overview/))
+
+2. 🔒Full encryption, you control your own files, privacy insured. [read more](https://rclone.org/crypt/)
+
+3. 🗄️Easy to backup.
+
+4. 🌍Get/Add your files from anywhere via a browser.
+
+5. ⛔No ads.
+
+6. 🤨One client to manage multiple drive backend.
+
+7. 🚀Supper fast.
 
 ## 🛫 Getting started
 
