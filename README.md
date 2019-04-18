@@ -1,4 +1,4 @@
-# Rclone Drive
+# Rclone Drive &middot; [![npm version](https://badge.fury.io/js/rclone-drive.svg)](https://badge.fury.io/js/rclone-drive)
 
 Under development
 
