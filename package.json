@@ -1,6 +1,6 @@
 {
   "name": "rclone-drive",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -16,8 +16,13 @@
     "dev": "nodemon cli.js --base-dir sijie:document --rclone \"/usr/local/bin/rclone\" --rclone-config \"/Users/wangsijie01/.config/rclone/rclone.conf\" --password pass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangsijie/rclone-drive.git"
+  },
+  "homepage": "https://github.com/wangsijie/rclone-drive.git",
+  "author": "wangsijie",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "commander": "^2.20.0",
