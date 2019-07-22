@@ -1,6 +1,6 @@
 {
   "name": "rclone-drive",
-  "version": "0.2.1",
+  "version": "0.2.5",
   "description": "",
   "main": "index.js",
   "bin": {

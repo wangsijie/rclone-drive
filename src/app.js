@@ -23,9 +23,9 @@ app.use(session({
     saveUninitialized: false,
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/asset', express.static('asset'));
+app.use('/asset', express.static(path.join(__dirname, '../asset')));
 app.set('view engine', 'ejs');
-app.set('views', './src/views');
+app.set('views', path.join(__dirname, './views'));
 
 app.use(authMiddleware);
 
