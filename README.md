@@ -95,7 +95,10 @@ Options:
 
 ## 🔧 TODO
 
-- [ ] Docker support
+- [ ] Pipeline
+- [ ] Online Demo
 - [ ] Error handler
-- [ ] Upload progress
+- [ ] File sharing
 - [ ] Directory/File move
+- [ ] Docker support
+- [ ] Upload progress
