@@ -1,10 +1,10 @@
-const moment = require('moment');
-const fileSize = require('filesize');
-const mime = require('mime-types');
-const rclone = require('../rclone');
+import moment from 'moment';
+import fileSize from 'filesize';
+import mime from 'mime-types';
+import * as rclone from '../rclone';
 
-module.exports.ls = async (directory) => {
-    const normalizedDirectory =
+export const ls = async (directory: string) => {
+    const normalizedDirectory: string =
         directory[directory.length - 1] === '/'
             ? directory.substr(0, directory.length - 1)
             : directory;
@@ -21,7 +21,7 @@ module.exports.ls = async (directory) => {
             icon: file.IsDir ? 'folder' : 'file',
             isDir: file.IsDir,
             url: `/${
-                file.IsDir ? 'browser' : 'download'
+                file.IsDir ? 'browser' : 'file/download'
             }${normalizedDirectory}/${file.Name}`,
             path: `${normalizedDirectory}/${file.Name}`,
         }));

@@ -1,0 +1,8 @@
+{
+  "watch": ["dist"],
+  "ext": "js",
+  "exec": "node dist/cli.js --base-dir sijie:document --rclone \"/usr/local/bin/rclone\" --rclone-config \"/Users/wangsijie/.config/rclone/rclone.conf\" --password pass --secret rclonedrivedev",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
