@@ -1,0 +1,26 @@
+.file-row {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    border-bottom: 1px solid #dadce0;
+    cursor: default;
+    &[data-is-current='true'] {
+        background: #E9F0FE;
+    }
+    .name {
+        display: flex;
+        align-items: center;
+        svg {
+            margin: 0 10px;
+        }
+        a {
+            color: unset;
+            text-decoration: unset;
+        }
+    }
+    .time {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

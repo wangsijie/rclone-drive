@@ -95,6 +95,7 @@ Options:
 
 ## 🔧 TODO
 
+- [ ] Password
 - [ ] Pipeline
 - [ ] Online Demo
 - [ ] Error handler
