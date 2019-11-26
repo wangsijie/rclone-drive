@@ -3,12 +3,11 @@ import axios, { AxiosResponse } from 'axios';
 export interface IRequestConfig {
     query?: any;
     method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT' | 'DELETE';
+    withCredentials?: boolean;
 };
 
-export const API_ROOT: string = 'http://localhost:3000';
-
 const request = async (endpoint: string, data: any, config: IRequestConfig) => {
-    let requestUrl: string = API_ROOT + endpoint;
+    let requestUrl: string = endpoint;
     if (config.query) {
         Object.keys(config.query).forEach((key: string, index: number) => {
             const value = config.query[key];
@@ -18,15 +17,28 @@ const request = async (endpoint: string, data: any, config: IRequestConfig) => {
             requestUrl += (index === 0 ? '?' : '&') + `${key}=${value}`;
         });
     }
-    let response: AxiosResponse;
-    if (config.method === 'GET') {
-        response = await axios.get(requestUrl);
-    } else if (config.method === 'POST') {
-        response = await axios.post(requestUrl, data);
-    } else if (config.method === 'DELETE') {
-        response = await axios.delete(requestUrl, data);
+    delete config.query;
+    const finalConfig: IRequestConfig = {
+        ...config,
+        withCredentials: true,
     }
-    return response.data;
+    let response: AxiosResponse;
+    try {
+        if (config.method === 'GET') {
+            response = await axios.get(requestUrl, finalConfig);
+        } else if (config.method === 'POST') {
+            response = await axios.post(requestUrl, data, finalConfig);
+        } else if (config.method === 'DELETE') {
+            response = await axios.delete(requestUrl, finalConfig);
+        }
+        return response.data;
+    } catch (e) {
+        if (typeof window !== 'undefined' && e.response && e.response.status === 401) {
+            window.location.href = '/login';
+        } else {
+            throw e;
+        }
+    }
 }
 
 export const get = (endpoint: string, query?: any, config: IRequestConfig = {}) => {

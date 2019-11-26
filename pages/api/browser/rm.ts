@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as browserService from '../../../utils/browser';
+import { apiAuth } from '../../../utils/auth';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    if (!apiAuth(req, res)) { return; }
     try {
         const { path, isDir } = req.body;
         if (!path) {

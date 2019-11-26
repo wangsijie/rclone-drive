@@ -2,14 +2,15 @@
   "name": "rclone-drive",
   "version": "0.3.0",
   "files": [
-    ".next"
+    ".next",
+    "cli.js"
   ],
   "bin": {
     "rclone-drive": "cli.js"
   },
   "scripts": {
-    "dev": "cross-env RD_BASE_REMOTE=sijie:document RD_PASSWORD=pass next",
-    "build": "next build",
+    "dev": "cross-env RD_BASE_REMOTE=sijie:document RD_PASSWORD=pass RD_SESSION_SECRET=local next",
+    "build": "rimraf .next && next build",
     "start": "next start",
     "type-check": "tsc"
   },
@@ -33,7 +34,11 @@
     "moment": "^2.24.0",
     "nanoid": "^2.1.7",
     "next": "latest",
-    "rc-upload": "^2.9.2"
+    "next-absolute-url": "^1.1.1",
+    "next-cookies": "^2.0.2",
+    "rc-upload": "^2.9.2",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1"
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.0",
@@ -43,8 +48,7 @@
     "@types/react-dom": "^16.9.1",
     "cross-env": "^6.0.3",
     "less": "^3.10.3",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "rimraf": "^3.0.0",
     "typescript": "3.6.3"
   }
 }

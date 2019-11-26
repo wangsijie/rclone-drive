@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Breadcrumbs, Typography } from '@material-ui/core';
+import { Breadcrumbs, Typography, Button } from '@material-ui/core';
 import './index.less';
 
 type Props = {
@@ -31,6 +31,7 @@ const BrowserNav: React.FunctionComponent<Props> = ({ path }) => {
                     <a>{nav.name}</a>
                 </Link>)}
             </Breadcrumbs>
+            <Button><a href="/api/logout">Logout</a></Button>
         </div>
     )
 }

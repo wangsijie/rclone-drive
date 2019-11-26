@@ -86,7 +86,7 @@ Options:
   -P, --port [port]                   Server port (default: "3000")
   -a, --address [address]             Server port (default: "localhost")
   -p, --password [password]           Password to login, default is random string
-  -s, --secret [secret]               Session scret, default is random string
+  -s, --secret [secret]               Session secret, if not set, session will only be saved in memory
   -r, --rclone [rclone]               Rclone bin path, e.g "/usr/local/bin/rclone"
   -R, --rclone-config [rcloneConfig]  Rclone config file path, e.g "/Users/wangsijie/.config/rclone/rclone.conf"
   -d, --base-dir [baseDir]            Rclone base dir, e.g "s3:defaultbucket"
@@ -95,8 +95,6 @@ Options:
 
 ## 🔧 TODO
 
-- [ ] Password
-- [ ] Pipeline
 - [ ] Online Demo
 - [ ] Error handler
 - [ ] File sharing
