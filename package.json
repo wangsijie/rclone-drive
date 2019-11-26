@@ -3,7 +3,8 @@
   "version": "0.3.0",
   "files": [
     ".next",
-    "cli.js"
+    "cli.js",
+    "screenshots"
   ],
   "bin": {
     "rclone-drive": "cli.js"

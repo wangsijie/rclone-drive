@@ -2,9 +2,13 @@
 
 ☁️Simple web cloud storage based on rclone, transform cloud storage (s3, google drive, one drive, dropbox) into own custom web-based storage
 
+Take a demo: [https://demo.rclone.app](https://demo.rclone.app) 
+
+password: `pass`
+
 🏗️Under development
 
-![screenshot](./guide/screenshot.png)
+![screenshot](./screenshots/browser.jpg)
 
 ## 👻 Features
 

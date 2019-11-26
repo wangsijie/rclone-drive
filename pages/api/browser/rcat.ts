@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Busboy from 'busboy';
+import { Stream } from 'stream';
 import path from 'path';
 import * as browserService from '../../../utils/browser';
 import { apiAuth } from '../../../utils/auth';
@@ -13,16 +14,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         req.pipe(busboy);
 
         let uploaded: boolean = false;
-        busboy.on('file', async (_: unknown, file: any, filename: string) => {
+        busboy.on('file', async (_: unknown, file: Stream, filename: string) => {
             if (uploaded) {
                 return;
             }
             uploaded = true; // 只上传一个文件
+            let size: number = 0;
+            file.on('data', (chunk) => size += chunk.length);
             await browserService.rcat(path.join(requestPath, filename), file);
             const uploadedFile: RCloneFile = {
                 name: filename,
                 time: new Date().toISOString(),
-                size: file.size,
+                size,
                 icon: 'file',
                 isDir: false,
                 path: requestPath,
