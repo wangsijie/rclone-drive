@@ -2,7 +2,7 @@
 var program = require('commander');
 var next = require('next');
 var express = require('express');
-var app = next({ dev: false });
+var app = next({ dev: false, dir: __dirname});
 var handler = app.getRequestHandler(app);
 
 program
