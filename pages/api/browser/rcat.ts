@@ -3,6 +3,7 @@ import Busboy from 'busboy';
 import path from 'path';
 import * as browserService from '../../../utils/browser';
 import { apiAuth } from '../../../utils/auth';
+import { RCloneFile } from '../../../interfaces';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (!apiAuth(req, res)) { return; }
@@ -17,12 +18,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 return;
             }
             uploaded = true; // 只上传一个文件
-
             await browserService.rcat(path.join(requestPath, filename), file);
-            // Wait for rclone to refresh (1s)
-            await new Promise((r) => setTimeout(r, 1000));
-            const files = await browserService.ls(requestPath);
-            const uploadedFile = files.find(f => f.name === filename);
+            const uploadedFile: RCloneFile = {
+                name: filename,
+                time: new Date().toISOString(),
+                size: file.size,
+                icon: 'file',
+                isDir: false,
+                path: requestPath,
+            };
             res.status(201).json(uploadedFile);
         });
     } catch (err) {
