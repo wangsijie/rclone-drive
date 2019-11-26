@@ -9,12 +9,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 // import { fetchWrapper } from '../../utils/api'
 import './index.less';
+import LoadingContext from '../../contexts/loading';
+import { post } from '../../utils/api';
 
 type Props = {
     path: string;
 }
 
 const NewFolder: React.FunctionComponent<Props> = ({ path }) => {
+    const { setLoading } = React.useContext(LoadingContext);
     const [open, setOpen] = React.useState<boolean>(false);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const router = useRouter();
@@ -24,6 +27,8 @@ const NewFolder: React.FunctionComponent<Props> = ({ path }) => {
         if (inputRef.current) {
             const value = inputRef.current.value;
             if (value && value.length) {
+                setLoading(true);
+                await post('/api/browser/mkdir', { path: `${path}${value}` });
                 router.push(`/browser/${encodeURIComponent(Buffer.from(`${path}${value}`).toString('base64'))}`);
             }
         }

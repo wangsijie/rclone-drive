@@ -41,3 +41,5 @@ export const rm = (path: string, isDir: boolean) => {
     }
     return rclone.deletefile(path);
 }
+
+export const mkdir = rclone.mkdir;
