@@ -10,7 +10,7 @@
     "rclone-drive": "cli.js"
   },
   "scripts": {
-    "dev": "cross-env RD_BASE_REMOTE=onedrive:rclone-drive-demo RD_PASSWORD=pass RD_SESSION_SECRET=local next",
+    "dev": "cross-env RD_BASE_REMOTE=local:data/ RD_PASSWORD=pass RD_SESSION_SECRET=local next",
     "build": "rimraf .next && next build",
     "start": "next start",
     "type-check": "tsc"
