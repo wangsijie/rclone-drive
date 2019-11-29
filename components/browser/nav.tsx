@@ -17,7 +17,7 @@ const BrowserNav: React.FunctionComponent<Props> = ({ path }) => {
     const navs = navItems.map((nav, index) => {
         const active = index === navItems.length - 1;
         if (index === 0) {
-            return { name: 'Home', url: '/browser', active };
+            return { name: 'Home', url: null, active };
         }
         url += `${nav}/`;
         return { name: nav, url: `/browser/${encodeURIComponent(Buffer.from(url).toString('base64'))}`, active };
@@ -27,9 +27,11 @@ const BrowserNav: React.FunctionComponent<Props> = ({ path }) => {
             <Breadcrumbs aria-label="breadcrumb">
                 {navs.map(nav => nav.active ? <Typography color="textPrimary" key={nav.url}>
                     {nav.name}
-                </Typography> : <Link key={nav.url} href={nav.url}>
+                </Typography> : (nav.url ? <Link key={nav.url} href={nav.url}>
                     <a>{nav.name}</a>
-                </Link>)}
+                </Link>: <a key={nav.url} href="/browser"> {/* It will lost session if using Link */}
+                    {nav.name}
+                </a>))}
             </Breadcrumbs>
             <Button><a href="/api/logout">Logout</a></Button>
         </div>
