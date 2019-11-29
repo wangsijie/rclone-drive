@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useRouter } from 'next/router'
+import sysPath from 'path';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -28,8 +29,9 @@ const NewFolder: React.FunctionComponent<Props> = ({ path }) => {
             const value = inputRef.current.value;
             if (value && value.length) {
                 setLoading(true);
-                await post('/api/browser/mkdir', { path: `${path}${value}` });
-                router.push(`/browser/${encodeURIComponent(Buffer.from(`${path}${value}`).toString('base64'))}`);
+                const dir = sysPath.join(path, value);
+                await post('/api/browser/mkdir', { path: dir });
+                router.push(`/browser/${encodeURIComponent(Buffer.from(dir).toString('base64'))}`);
             }
         }
     }
