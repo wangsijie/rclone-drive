@@ -3,6 +3,7 @@ import { NextApiResponse } from 'next';
 import spawnP from '../spawn-promise';
 import { Stream } from 'stream';
 import config from '../config';
+import { RCloneError, RCloneErrorRemark } from './error';
 
 const generateRcloneCommand = (args: string[]): [string, string[]] => {
     if (!config.rclonePath || !config.rcloneConfigPath) {
@@ -20,8 +21,16 @@ export const ls = async (path: string): Promise<any[]> => {
     return files;
 };
 
-export const cat = async (path: string, res: NextApiResponse): Promise<void> => {
+export const cat = async (path: string, res: NextApiResponse, onError?: Function): Promise<void> => {
     const rclone = spawn(...generateRcloneCommand(['cat', `${config.baseRemote}${path}`]));
+    rclone.stderr.setEncoding('utf8');
+    rclone.stderr.on('data', data => {
+		if (/directory\snot\sfound/.test(data)) {
+            onError && onError(new RCloneError(undefined, RCloneErrorRemark.DirectoryNotFound));
+        } else {
+            onError && onError(new Error(data));
+        }
+	});
     rclone.stdout.pipe(res);
 };
 

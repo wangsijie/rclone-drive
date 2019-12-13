@@ -99,8 +99,6 @@ Options:
 
 ## 🔧 TODO
 
-- [ ] Online Demo
-- [ ] Error handler
 - [ ] File sharing
 - [ ] Directory/File move
 - [ ] Docker support

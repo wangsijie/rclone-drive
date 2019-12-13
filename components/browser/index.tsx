@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 import Layout from '../Layout';
 import { RCloneFile } from '../../interfaces';
 import Nav from './nav';
@@ -13,9 +14,10 @@ import './index.less';
 type Props = {
     files: RCloneFile[];
     path?: string;
+    notFound?: boolean;
 }
 
-const Browser: React.FunctionComponent<Props> = ({ files, path = '/' }) => {
+const Browser: React.FunctionComponent<Props> = ({ files, path = '/', notFound }) => {
     const [current, setCurrent] = React.useState<string | null>(null);
     const [uploadedFiles, setUploadedFiles] = React.useState<RCloneFile[]>([]);
     const [deletedNames, setDeletedNames] = React.useState<string[]>([]);
@@ -53,6 +55,13 @@ const Browser: React.FunctionComponent<Props> = ({ files, path = '/' }) => {
         setCurrent(null);
         setDeletedNames(prevNames => [...prevNames, name]);
     }, [setDeletedNames, setCurrent]);
+
+    if (notFound) {
+        return <Layout className="ui-browser error">
+            <div>Can't find path: {path}</div>
+            <Button href="/browser">Back to home</Button>
+        </Layout>
+    }
 
     return (
         <Layout className="ui-browser">

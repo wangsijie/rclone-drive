@@ -1,13 +1,6 @@
 import { spawn } from 'child_process';
+import { SpawnResult, RCloneErrorRemark, RCloneError } from './rclone/error';
 
-export interface SpawnResult {
-	spawn: any;
-	stdin: any,
-	stdout: any,
-	stderr: any,
-	exit: any,
-	process: any,
-}
 
 const getExitCode = (code: number): string => {
 	switch (code) {
@@ -68,7 +61,15 @@ const spawnPromise = async (command: string, args?: any, input?: any) => {
 	}
 
 	// Return
-	if (!isEmpty(errors)) throw new Error(JSON.stringify(errors));
+	if (!isEmpty(errors)) {
+		let remark = RCloneErrorRemark.Unknown;
+		if (errors.process) {
+			if (/directory\snot\sfound/.test(errors.process)) {
+				remark = RCloneErrorRemark.DirectoryNotFound;
+			}
+		}
+		throw new RCloneError(errors, remark);
+	};
 	return Buffer.concat(buffers);
 }
 
