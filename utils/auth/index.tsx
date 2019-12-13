@@ -51,13 +51,13 @@ export const withAuthSync = (WrappedComponent: any) => {
     }
 
     Wrapper.getInitialProps = async (ctx: NextPageContext) => {
-        const token = auth(ctx);
+        auth(ctx);
 
         const componentProps =
             WrappedComponent.getInitialProps &&
             (await WrappedComponent.getInitialProps(ctx))
 
-        return { ...componentProps, token };
+        return { ...componentProps };
     }
 
     return Wrapper;
