@@ -6,16 +6,16 @@ var app = next({ dev: false, dir: __dirname});
 var handler = app.getRequestHandler(app);
 
 program
-    .version('0.1.0')
+    .version('0.4.2')
     .option('-P, --port [port]', 'Server port', '3000')
-    .option('-a, --address [address]', 'Server port', 'localhost')
+    .option('-a, --address [address]', 'Server address', 'localhost')
     .option('-p, --password [password]', 'Password to login, default is random string')
     .option('-s, --secret [secret]', 'Session scret, default is random string')
     .option('-r, --rclone [rclone]', 'Rclone bin path, e.g "/usr/local/bin/rclone"')
     .option('-R, --rclone-config [rcloneConfig]', 'Rclone config file path, e.g "/Users/wangsijie/.config/rclone/rclone.conf"')
     .option('-d, --base-dir [baseDir]', 'Rclone base dir, e.g "s3:defaultbucket"')
     .option('-t, --token [token]', 'Public api token')
-    .option('-a, --public-path [publickPath]', 'Public dir path')
+    .option('-a, --public-path [publicPath]', 'Public dir path')
     .parse(process.argv);
 
 try {
