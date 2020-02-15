@@ -21,18 +21,21 @@ export const ls = async (path: string): Promise<any[]> => {
     return files;
 };
 
-export const cat = async (path: string, res: NextApiResponse, onError?: Function): Promise<void> => {
-    const rclone = spawn(...generateRcloneCommand(['cat', `${config.baseRemote}${path}`]));
-    rclone.stderr.setEncoding('utf8');
-    rclone.stderr.on('data', data => {
-		if (/directory\snot\sfound/.test(data)) {
-            onError && onError(new RCloneError(undefined, RCloneErrorRemark.DirectoryNotFound));
-        } else {
-            onError && onError(new Error(data));
-        }
-	});
-    rclone.stdout.pipe(res);
-};
+export const cat = (path: string, res: NextApiResponse): Promise<void> => new Promise((resolve, reject) => {
+    {
+        const rclone = spawn(...generateRcloneCommand(['cat', `${config.baseRemote}${path}`]));
+        rclone.stderr.setEncoding('utf8');
+        rclone.stderr.on('data', data => {
+            if (/directory\snot\sfound/.test(data)) {
+                reject(new RCloneError(undefined, RCloneErrorRemark.DirectoryNotFound));
+            } else {
+                reject(new Error(data));
+            }
+        });
+        rclone.stdout.pipe(res);
+        rclone.on('close', resolve);
+    }
+});
 
 export const rcat = (path: string, stream: Stream) =>
     new Promise((resolve, reject) => {
