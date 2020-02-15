@@ -6,7 +6,7 @@ var app = next({ dev: false, dir: __dirname});
 var handler = app.getRequestHandler(app);
 
 program
-    .version('0.4.3')
+    .version('0.4.4')
     .option('-P, --port [port]', 'Server port', '3000')
     .option('-a, --address [address]', 'Server address', 'localhost')
     .option('-p, --password [password]', 'Password to login, default is random string')

@@ -1,9 +1,11 @@
 import { spawn } from 'child_process';
 import { NextApiResponse } from 'next';
+import path from 'path';
 import spawnP from '../spawn-promise';
 import { Stream } from 'stream';
 import config from '../config';
 import { RCloneError, RCloneErrorRemark } from './error';
+import { preventEmptyStream } from '..';
 
 const generateRcloneCommand = (args: string[]): [string, string[]] => {
     if (!config.rclonePath || !config.rcloneConfigPath) {
@@ -21,9 +23,9 @@ export const ls = async (path: string): Promise<any[]> => {
     return files;
 };
 
-export const cat = (path: string, res: NextApiResponse): Promise<void> => new Promise((resolve, reject) => {
+export const cat = (dir: string, res: NextApiResponse): Promise<void> => new Promise((resolve, reject) => {
     {
-        const rclone = spawn(...generateRcloneCommand(['cat', `${config.baseRemote}${path}`]));
+        const rclone = spawn(...generateRcloneCommand(['cat', path.join(config.baseRemote, dir)]));
         rclone.stderr.setEncoding('utf8');
         rclone.stderr.on('data', data => {
             if (/directory\snot\sfound/.test(data)) {
@@ -32,8 +34,8 @@ export const cat = (path: string, res: NextApiResponse): Promise<void> => new Pr
                 reject(new Error(data));
             }
         });
-        rclone.stdout.pipe(res);
-        rclone.on('close', resolve);
+        rclone.stdout.pipe(preventEmptyStream(res));
+        rclone.on('exit', resolve);
     }
 });
 
