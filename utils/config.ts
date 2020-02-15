@@ -3,6 +3,7 @@ import * as path from 'path';
 import { homedir } from 'os';
 
 export interface ConfigOptions {
+    listen?: string;
     baseRemote?: string;
     password?: string;
     sessionSecret?: string;
@@ -20,6 +21,7 @@ const data: ConfigOptions = {
     rcloneConfigPath: process.env.RD_RCLONE_CONFIG_PATH || path.join(homedir(), '.config/rclone/rclone.conf'),
     publicPath: process.env.RD_PUBLIC_PATH ? String(process.env.RD_PUBLIC_PATH).replace(/^\//, '') : null,
     token: process.env.RD_TOKEN || null,
+    listen: process.env.LISTEN || null,
 };
 
 export default data;

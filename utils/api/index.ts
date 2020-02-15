@@ -1,4 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
+import { NextPageContext } from 'next';
+import absoluteUrl from 'next-absolute-url';
+import config from '../config';
 
 export interface IRequestConfig {
     query?: any;
@@ -57,4 +60,12 @@ export const upload = (endpoint: string, payload: any, config: IRequestConfig = 
 
 export const deleteRequest = (endpoint: string, data?: any, config: IRequestConfig = {}) => {
     return request(endpoint, data, { ...config, method: 'DELETE' })
+}
+
+export const getSelfUrl = (ctx: NextPageContext) => {
+    if (config.listen) {
+        return config.listen;
+    }
+    const { protocol, host } = absoluteUrl(ctx.req);
+    return `${protocol}//${host}`;
 }

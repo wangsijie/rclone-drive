@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { NextPage, NextPageContext } from 'next';
-import absoluteUrl from 'next-absolute-url';
 import nextCookie from 'next-cookies';
-import { get } from '../../utils/api';
+import { get, getSelfUrl } from '../../utils/api';
 import { RCloneFile } from '../../interfaces';
 import Browser from '../../components/browser';
 import { withAuthSync } from '../../utils/auth';
@@ -22,12 +21,11 @@ const BrowserPage: NextPage<Props> = ({ files, path, notFound }) => {
 
 BrowserPage.getInitialProps = async (ctx: NextPageContext) => {
   const { token } = nextCookie(ctx);
-  const { query, req } = ctx;
-  const { protocol, host } = absoluteUrl(req);
+  const { query } = ctx;
   const path: string = Buffer.from(String(query.path), 'base64').toString('utf-8');
   try {
     const endpoint = `/api/browser/ls?token=${token}&path=${encodeURIComponent(String(query.path))}`;
-    const files: RCloneFile[] = await get(`${protocol}//${host}${endpoint}`);
+    const files: RCloneFile[] = await get(`${getSelfUrl(ctx)}${endpoint}`);
     return { files, path };
   } catch (e) {
     if (e.response.data.remark === RCloneErrorRemark.DirectoryNotFound) {
