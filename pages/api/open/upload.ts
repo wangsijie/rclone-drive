@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 size,
                 icon: 'file',
                 isDir: false,
-                path: requestPath,
+                path: req.query.path ? requestPath : requestPath.replace(`/${configs.publicPath}`, ''),
             };
             res.status(201).json(uploadedFile);
         });
