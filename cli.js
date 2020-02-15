@@ -14,6 +14,8 @@ program
     .option('-r, --rclone [rclone]', 'Rclone bin path, e.g "/usr/local/bin/rclone"')
     .option('-R, --rclone-config [rcloneConfig]', 'Rclone config file path, e.g "/Users/wangsijie/.config/rclone/rclone.conf"')
     .option('-d, --base-dir [baseDir]', 'Rclone base dir, e.g "s3:defaultbucket"')
+    .option('-t, --token [token]', 'Public api token')
+    .option('-a, --public-path [publickPath]', 'Public dir path')
     .parse(process.argv);
 
 try {
@@ -32,6 +34,8 @@ try {
     process.env['RD_SESSION_SECRET'] = program.secret;
     process.env['RD_RCLONE_PATH'] = program.rclone.replace(/"/g, '');
     process.env['RD_RCLONE_CONFIG_PATH'] = program.rcloneConfig.replace(/"/g, '');
+    process.env['RD_TOKEN'] = program.token.replace(/"/g, '');
+    process.env['RD_PUBLIC_PATH'] = program.publicPath.replace(/"/g, '');
 
     var port = program.port || 3000;
     var address = program.address || 'localhost';

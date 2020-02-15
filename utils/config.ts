@@ -8,6 +8,8 @@ export interface ConfigOptions {
     sessionSecret?: string;
     rclonePath?: string;
     rcloneConfigPath?: string;
+    publicPath?: string;
+    token?: string;
 }
 
 const data: ConfigOptions = {
@@ -16,6 +18,8 @@ const data: ConfigOptions = {
     sessionSecret: process.env.RD_SESSION_SECRET || null,
     rclonePath: process.env.RD_RCLONE_PATH || '/usr/local/bin/rclone',
     rcloneConfigPath: process.env.RD_RCLONE_CONFIG_PATH || path.join(homedir(), '.config/rclone/rclone.conf'),
+    publicPath: process.env.RD_PUBLIC_PATH ? String(process.env.RD_PUBLIC_PATH).replace(/^\//, '') : null,
+    token: process.env.RD_TOKEN || null,
 };
 
 export default data;
