@@ -1,5 +1,16 @@
-// next.config.js
 const withLess = require('@zeit/next-less')
-module.exports = withLess({
-  /* config options here */
-})
+
+module.exports = () => {
+  const config = {
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        config.module.rules.push({
+          test: /be-modules/,
+          use: "null-loader",
+        })
+      }
+      return config
+    },
+  };
+  return withLess(config)
+}

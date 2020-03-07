@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Busboy from 'busboy';
 import { Stream } from 'stream';
 import path from 'path';
-import * as browserService from '../../../utils/browser';
+import * as browserService from '../../../be-modules/browser';
 import { apiAuth } from '../../../utils/auth';
 import { RCloneFile } from '../../../interfaces';
 

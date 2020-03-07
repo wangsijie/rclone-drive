@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as browserService from '../../../utils/browser';
-import { RCloneErrorRemark } from '../../../utils/rclone/error';
+import * as browserService from '../../../be-modules/browser';
+import { RCloneErrorRemark } from '../../../be-modules/rclone/error';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const path = Buffer.from(String(req.query.path), 'base64').toString('utf-8');

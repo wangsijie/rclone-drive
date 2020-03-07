@@ -4,7 +4,7 @@ import { Stream } from 'stream';
 import path from 'path';
 import * as UUID from 'readableuuid';
 import moment from 'moment';
-import * as browserService from '../../../utils/browser';
+import * as browserService from '../../../be-modules/browser';
 import { openAuth } from '../../../utils/auth/open';
 import { RCloneFile } from '../../../interfaces';
 import configs from '../../../utils/config';

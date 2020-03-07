@@ -1,6 +1,6 @@
 import { Transform, Writable } from 'stream';
 
-export function preventEmptyStream(output: Writable) {
+export default function preventEmptyStream(output: Writable) {
     let started = false;
     const transform = new Transform({
         transform(chunk, _encoding, callback) {

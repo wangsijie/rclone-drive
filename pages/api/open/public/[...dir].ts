@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
-import * as browserService from '../../../../utils/browser';
-import { RCloneErrorRemark } from '../../../../utils/rclone/error';
+import * as browserService from '../../../../be-modules/browser';
+import { RCloneErrorRemark } from '../../../../be-modules/rclone/error';
 import config from '../../../../utils/config';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

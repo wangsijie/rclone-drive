@@ -3,9 +3,9 @@ import { NextApiResponse } from 'next';
 import path from 'path';
 import spawnP from '../spawn-promise';
 import { Stream } from 'stream';
-import config from '../config';
+import config from '../../utils/config';
 import { RCloneError, RCloneErrorRemark } from './error';
-import { preventEmptyStream } from '..';
+import preventEmptyStream from '../prevent-empty-stream';
 
 const generateRcloneCommand = (args: string[]): [string, string[]] => {
     if (!config.rclonePath || !config.rcloneConfigPath) {

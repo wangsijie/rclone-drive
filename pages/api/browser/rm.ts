@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as browserService from '../../../utils/browser';
+import * as browserService from '../../../be-modules/browser';
 import { apiAuth } from '../../../utils/auth';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

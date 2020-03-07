@@ -1,4 +1,4 @@
-import nanoid from 'nanoid';
+import nanoid from 'readableuuid';
 import * as path from 'path';
 import { homedir } from 'os';
 
@@ -17,11 +17,10 @@ const data: ConfigOptions = {
     baseRemote: process.env.RD_BASE_REMOTE,
     password: process.env.RD_PASSWORD || nanoid(),
     sessionSecret: process.env.RD_SESSION_SECRET || null,
-    rclonePath: process.env.RD_RCLONE_PATH || '/usr/local/bin/rclone',
+    rclonePath: process.env.RD_RCLONE_PATH || 'rclone',
     rcloneConfigPath: process.env.RD_RCLONE_CONFIG_PATH || path.join(homedir(), '.config/rclone/rclone.conf'),
     publicPath: process.env.RD_PUBLIC_PATH ? String(process.env.RD_PUBLIC_PATH).replace(/^\//, '') : null,
     token: process.env.RD_TOKEN || null,
-    listen: process.env.RD_LISTEN || null,
 };
 
 export default data;

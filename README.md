@@ -101,6 +101,7 @@ Options:
 
 ## 🔧 TODO
 
+- [ ] Check if rclone is installed properly
 - [ ] File sharing
 - [ ] Directory/File move
 - [ ] Docker support

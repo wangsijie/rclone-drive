@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { NextPage, NextPageContext } from 'next';
-import nextCookie from 'next-cookies';
-import { get, getSelfUrl } from '../utils/api';
+import { NextPage } from 'next';
 import { RCloneFile } from '../interfaces';
 import Browser from '../components/browser';
 import { withAuthSync } from '../utils/auth';
+import * as browserService from '../be-modules/browser';
 
 type Props = {
   files: RCloneFile[];
@@ -16,9 +15,8 @@ const IndexPage: NextPage<Props> = ({ files }) => {
   )
 }
 
-IndexPage.getInitialProps = async (ctx: NextPageContext) => {
-  const { token } = nextCookie(ctx);
-  const files: RCloneFile[] = await get(`${getSelfUrl(ctx)}/api/browser/ls`, { token });
+IndexPage.getInitialProps = async () => {
+  const files: RCloneFile[] = await browserService.ls('/');
   return { files };
 }
 

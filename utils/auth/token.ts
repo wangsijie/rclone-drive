@@ -1,4 +1,4 @@
-import nanoid from 'nanoid';
+import nanoid from 'readableuuid';
 import crypto from 'crypto';
 import config from '../config';
 

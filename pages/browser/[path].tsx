@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { NextPage, NextPageContext } from 'next';
-import nextCookie from 'next-cookies';
-import { get, getSelfUrl } from '../../utils/api';
 import { RCloneFile } from '../../interfaces';
 import Browser from '../../components/browser';
 import { withAuthSync } from '../../utils/auth';
-import { RCloneErrorRemark } from '../../utils/rclone/error';
+import { RCloneErrorRemark } from '../../be-modules/rclone/error';
+import * as browserService from '../../be-modules/browser';
 
 type Props = {
   files: RCloneFile[];
@@ -20,15 +19,13 @@ const BrowserPage: NextPage<Props> = ({ files, path, notFound }) => {
 }
 
 BrowserPage.getInitialProps = async (ctx: NextPageContext) => {
-  const { token } = nextCookie(ctx);
   const { query } = ctx;
   const path: string = Buffer.from(String(query.path), 'base64').toString('utf-8');
   try {
-    const endpoint = `/api/browser/ls?token=${token}&path=${encodeURIComponent(String(query.path))}`;
-    const files: RCloneFile[] = await get(`${getSelfUrl(ctx)}${endpoint}`);
+    const files: RCloneFile[] = await browserService.ls(path);
     return { files, path };
   } catch (e) {
-    if (e.response.data.remark === RCloneErrorRemark.DirectoryNotFound) {
+    if (e.remark === RCloneErrorRemark.DirectoryNotFound) {
       return { files: [], notFound: true, path }
     }
     return { files: [], path: '' }
