@@ -18,6 +18,7 @@ export const auth = (ctx: NextPageContext): string => {
         } else {
             Router.push('/login');
         }
+        return null;
     }
 
     return token;
@@ -51,7 +52,9 @@ export const withAuthSync = (WrappedComponent: any) => {
     }
 
     Wrapper.getInitialProps = async (ctx: NextPageContext) => {
-        auth(ctx);
+        if (!auth(ctx)) {
+            return {};
+        }
 
         const componentProps =
             WrappedComponent.getInitialProps &&

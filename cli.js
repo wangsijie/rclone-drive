@@ -7,7 +7,7 @@ var app = next({ dev: false, dir: __dirname});
 var handler = app.getRequestHandler(app);
 
 program
-    .version('0.5.0')
+    .version('0.5.1')
     .option('-P, --port [port]', 'Server port', '3000')
     .option('-a, --address [address]', 'Server address', 'localhost')
     .option('-p, --password [password]', 'Password to login, default is random string')
@@ -28,12 +28,16 @@ try {
         }
         return replace(/"/g, '');
     }
-
+    
     process.env['RD_BASE_REMOTE'] = program.baseDir;
     process.env['RD_PASSWORD'] = program.password || nanoid(6);
     process.env['RD_SESSION_SECRET'] = program.secret;
-    process.env['RD_RCLONE_PATH'] = resolveQuote(program.rclone);
-    process.env['RD_RCLONE_CONFIG_PATH'] = resolveQuote(program.rcloneConfig);
+    if (program.rclone) {
+        process.env['RD_RCLONE_PATH'] = resolveQuote(program.rclone);
+    }
+    if (program.rcloneConfig) {
+        process.env['RD_RCLONE_CONFIG_PATH'] = resolveQuote(program.rcloneConfig);
+    }
 
     var port = program.port || 3000;
     var address = program.address || 'localhost';
