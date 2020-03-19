@@ -6,8 +6,6 @@ Take a demo: [https://demo.rclone.app](https://demo.rclone.app)
 
 password: `pass`
 
-:warning: Due to a security issue, the demo app is shut down temporarily.
-
 🏗️Under development
 
 ![screenshot](./screenshots/browser.jpg)
